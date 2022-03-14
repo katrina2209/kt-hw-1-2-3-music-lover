@@ -1,9 +1,12 @@
-fun main() {
-    val previousSum = 10_000
-    val buyingSum = 332
-    val isMeloman = true
-    val sumWithDiscount = if (previousSum <= 1_000) buyingSum else if (previousSum >= 10_001) buyingSum * 95 / 100 else if (buyingSum - 100 > 0) buyingSum - 100 else 0
-    val result = if (isMeloman) sumWithDiscount * 99 / 100 else sumWithDiscount
+import kotlin.math.roundToInt
 
-    println("Сумма покупки с учетом всех скидок: $result рублей ${result % 100} коп.")
+fun main() {
+    val previousSum = 10_002
+    val buyingSum = 399.00
+    val isMeloman = true
+    val discount = if (previousSum >= 10_001) buyingSum * 0.05 else if (buyingSum - 100 > 0) 100.00 else 0.00
+    val sumWithDiscount = buyingSum - discount
+    val result = (if (isMeloman) sumWithDiscount * 99 else sumWithDiscount * 100)
+
+    println("Сумма покупки с учетом всех скидок: ${(result / 100).toInt()} руб. ${(result % 100).roundToInt().toInt()} коп.")
 }
